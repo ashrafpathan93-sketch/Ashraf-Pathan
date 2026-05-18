@@ -1,0 +1,23 @@
+Select distinct state from employees;
+
+<img width="1009" height="406" alt="image" src="https://github.com/user-attachments/assets/c5ed0abd-d9cb-493c-b3fd-bde28cbb4974" />
+
+Select count (distinct state) from employees;
+
+<img width="1002" height="389" alt="image" src="https://github.com/user-attachments/assets/9ed69d23-26fb-425e-9050-d182a540237c" />
+
+
+Select title, state from employees where state = 'AB'
+
+<img width="836" height="510" alt="image" src="https://github.com/user-attachments/assets/c7a6372e-ee37-46ca-b808-65e0c73dff9c" />
+
+Select title, state from employees where state = 'AB' order by Title ASC;
+
+<img width="795" height="518" alt="image" src="https://github.com/user-attachments/assets/b9208de6-1ac8-4bde-a3b0-45a54c2f531e" />
+
+
+Select title, state from employees where state = 'AB' order by Title DESC;
+
+<img width="816" height="523" alt="image" src="https://github.com/user-attachments/assets/49ad8acc-aa18-4c3f-b82d-81f35765ef00" />
+
+
