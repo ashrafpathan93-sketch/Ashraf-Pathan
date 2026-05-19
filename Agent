@@ -1,0 +1,4 @@
+CREATE TABLE agent ( FirstName Text, LastName Text, email Text UNIQUE, company id);
+INSERT INTO agent (FirstName, Lastname, email, company) VALUES ('Taufik', 'Sayyed', 'taufik@gmail.com', 4455);
+INSERT into agent VALUES ('Zaid', 'Pathan', 'zaid@gmail.com', 3636);
+SELECT * FROM agent;
