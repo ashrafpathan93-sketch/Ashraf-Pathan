@@ -1,0 +1,36 @@
+CREATE TABLE classes (id, subject text);
+INSERT INTO classes VALUES (1, 'Maths');
+INSERT into classes VALUES (2, 'Hindi');
+SELECT * FROM classes;
+UPDATE classes SET subject = 'science' WHERE id = 1;
+SELECT * FROM classes;
+DELETE FROM classes WHERE subject = 'Hindi'; 
+SELECT * FROM classes;
+DROP TABLE classes;
+
+
+SELECT CustomerId As ID, FirstName As Fn FROM Customers;
+
+SELECT * from customers where country in ('Germany', 'Brazil' );
+
+SELECT * from customers where country in ('Germany', 'Brazil' );
+
+SELECT * from customers where firstname like 'Astrid';
+
+SELECT * from customers where firstname like 'a__%';
+
+SELECT * from customers where firstname like 'H%a';
+
+SELECT * from customers where firstname like '%a';
+
+SELECT AVG(TrackId) from invoice_items;
+
+SELECT Sum(TrackId) from invoice_items;
+
+SELECT Count(TrackId) from invoice_items;
+
+SELECT Min(TrackId) from invoice_items;
+
+SELECT Max(TrackId) from invoice_items;
+
+SELECT * FROM artists limit 5;
