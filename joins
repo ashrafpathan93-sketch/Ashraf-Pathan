@@ -1,0 +1,20 @@
+SELECT Invoices.InvoiceId, Customers.FirstName, Invoices.BillingCity FROM Invoices 
+INNER JOIN Customers ON Invoices.CustomerId = Customers.CustomerID;
+
+SELECT Invoices.InvoiceId, Customers.FirstName, Invoices.BillingCity FROM Invoices 
+Left JOIN Customers ON Invoices.CustomerId = Customers.CustomerID;
+
+SELECT Invoices.InvoiceId, Customers.FirstName, Invoices.BillingCity FROM Invoices 
+Right JOIN Customers ON Invoices.CustomerId = Customers.CustomerID;
+
+select albums.AlbumId, artists.name, albums.title from albums 
+join artists on albums.artistid = artists.artistid;
+
+SELECT playlists.name, playlist_track.trackid
+FROM playlists
+JOIN playlist_track ON playlists.PlaylistId = play
+
+SELECT playlists.name, playlist_track.TrackId, tracks.name
+FROM playlists
+JOIN playlist_track ON playlists.PlaylistId = playlist_track.PlaylistId
+JOIN tracks ON playlist_track.TrackId = tracks.TrackId
