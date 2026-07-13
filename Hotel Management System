@@ -1,0 +1,137 @@
+-- 1. Drop tables if they exist
+drop table if exists payments;
+drop table if exists bookings;
+drop table if exists rooms;
+drop table if exists guests;
+
+-- 2. Create tables
+
+create table guests (
+    guest_id  integer primary key autoincrement,
+    name      text    not null,
+    phone     text    not null,
+    email     text    unique not null
+);
+
+create table rooms (
+    room_id       integer primary key autoincrement,
+    room_number   text    unique not null,
+    room_type     text    not null check(room_type in ('Single','Double','Deluxe','Suite','Penthouse')),
+    price_per_day real    not null check(price_per_day > 0),
+    status        text    not null check(status in ('Available','Booked')) default 'Available'
+);
+
+create table bookings (
+    booking_id     integer primary key autoincrement,
+    guest_id       integer not null,
+    room_id        integer not null,
+    check_in_date  text    default current_date,
+    check_out_date text,
+    foreign key (guest_id) references guests(guest_id),
+    foreign key (room_id)  references rooms(room_id)
+);
+
+create table payments (
+    payment_id   integer primary key autoincrement,
+    booking_id   integer not null,
+    amount       real    not null check(amount > 0),
+    payment_date text    default current_date,
+    foreign key (booking_id) references bookings(booking_id)
+);
+
+-- 3. Insert 5 guests
+insert into guests (name, phone, email) values
+    ('Ashraf Pathan', '9876543210', 'ashraf@email.com'),
+    ('Priya Sharma',  '9123456780', 'priya@email.com'),
+    ('Rahul Mehta',   '9988776655', 'rahul@email.com'),
+    ('Fatima Khan',   '9001122334', 'fatima@email.com'),
+    ('Arjun Desai',   '9445566778', 'arjun@email.com');
+
+-- 4. Insert one room of each type
+insert into rooms (room_number, room_type, price_per_day, status) values
+    ('101', 'Single',      1500.00, 'Booked'),
+    ('102', 'Double',      2500.00, 'Booked'),
+    ('201', 'Deluxe',      4000.00, 'Booked'),
+    ('301', 'Suite',       7000.00, 'Available'),
+    ('401', 'Penthouse',  15000.00, 'Booked');
+
+-- 5. Insert bookings
+insert into bookings (guest_id, room_id, check_in_date, check_out_date) values
+    (1, 1, '2025-07-01', '2025-07-03'),
+    (2, 2, '2025-07-02', '2025-07-05'),
+    (3, 3, '2025-07-03', '2025-07-06'),
+    (4, 4, '2025-07-04', '2025-07-07'),
+    (5, 5, '2025-07-05', '2025-07-10');
+
+-- 6. Insert payments (amount = price_per_day x nights)
+insert into payments (booking_id, amount, payment_date) values
+    (1,  3000.00, '2025-07-01'),
+    (2,  7500.00, '2025-07-02'),
+    (3, 12000.00, '2025-07-03'),
+    (4, 21000.00, '2025-07-04'),
+    (5, 75000.00, '2025-07-05');
+
+-- 7. Display all guests
+select * from guests;
+
+-- 8. Display available rooms
+select room_id, room_number, room_type, price_per_day
+from rooms
+where status = 'Available';
+
+-- 9. View booking details using join
+select b.booking_id,
+       g.name            as guest_name,
+       g.phone,
+       r.room_number,
+       r.room_type,
+       r.price_per_day,
+       b.check_in_date,
+       b.check_out_date,
+       (julianday(b.check_out_date) - julianday(b.check_in_date)) as nights_stayed
+from bookings b
+join guests g on b.guest_id = g.guest_id
+join rooms  r on b.room_id  = r.room_id;
+
+-- 10. Update room status (mark room 301 as Booked)
+update rooms
+set status = 'Booked'
+where room_number = '301';
+
+select room_number, room_type, status from rooms where room_number = '301';
+
+-- 11. Calculate total revenue
+select sum(amount) as total_revenue from payments;
+
+-- 12. Find guest booking history (guest_id = 1)
+select b.booking_id,
+       g.name           as guest_name,
+       r.room_number,
+       r.room_type,
+       b.check_in_date,
+       b.check_out_date,
+       p.amount         as amount_paid,
+       p.payment_date
+from bookings b
+join guests   g on b.guest_id   = g.guest_id
+join rooms    r on b.room_id    = r.room_id
+join payments p on b.booking_id = p.booking_id
+where g.guest_id = 1;
+
+-- 13. Delete booking / checkout (booking_id = 1)
+delete from payments where booking_id = 1;
+delete from bookings where booking_id = 1;
+update rooms set status = 'Available' where room_id = 1;
+
+-- 14. Display all bookings
+select b.booking_id,
+       g.name       as guest_name,
+       r.room_number,
+       r.room_type,
+       b.check_in_date,
+       b.check_out_date,
+       r.status     as room_status
+from bookings b
+join guests g on b.guest_id = g.guest_id
+join rooms  r on b.room_id  = r.room_id
+order by b.booking_id;
