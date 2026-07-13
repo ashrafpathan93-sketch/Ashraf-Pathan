@@ -1,0 +1,85 @@
+Algorithm – Hotel Management System
+Algorithm:
+Start the program.
+Drop existing tables (if they already exist).
+Create the following tables:
+Guests
+Rooms
+Bookings
+Payments
+Insert guest details into the Guests table.
+Insert room details into the Rooms table.
+Create booking records by assigning guests to rooms.
+Store payment details for each booking.
+Display all guest records.
+Display all available rooms.
+Display booking details using JOIN operations.
+Update room status when a room is booked.
+Calculate total hotel revenue from the Payments table.
+Display booking history for a specific guest.
+During checkout:
+Delete payment record.
+Delete booking record.
+Update room status to Available.
+Display the updated booking records.
+End the program.
+
+
+
+
+                    START
+                      │
+                      ▼
+        Drop Existing Tables (if any)
+                      │
+                      ▼
+              Create Database Tables
+      (Guests, Rooms, Bookings, Payments)
+                      │
+                      ▼
+             Insert Guest Details
+                      │
+                      ▼
+              Insert Room Details
+                      │
+                      ▼
+             Create Room Booking
+                      │
+                      ▼
+             Record Payment Details
+                      │
+                      ▼
+        Display Guests & Available Rooms
+                      │
+                      ▼
+        Display Booking Details (JOIN)
+                      │
+                      ▼
+            Update Room Status?
+                      │
+                      ▼
+          Calculate Total Revenue
+                      │
+                      ▼
+      Display Guest Booking History
+                      │
+                      ▼
+             Guest Checkout?
+                 ┌────┴────┐
+                 │         │
+               Yes         No
+                 │         │
+                 ▼         │
+      Delete Payment Record│
+                 │         │
+                 ▼         │
+      Delete Booking Record│
+                 │         │
+                 ▼         │
+   Update Room Status = Available
+                 │
+                 ▼
+      Display Updated Bookings
+                 │
+                 ▼
+                 END
